@@ -1,6 +1,8 @@
-HTML-builder/
-clean-code-s1e1/
-core-js-101/
-migration-to-ts/
-news-JS/
-proxy.txt
+node_modules/
+dist/
+../HTML-builder/
+../clean-code-s1e1/
+../core-js-101/
+../migration-to-ts/
+../news-JS/
+../proxy.txt
