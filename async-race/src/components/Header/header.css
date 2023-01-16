@@ -1,0 +1,6 @@
+.header__buttons button {
+  width: 130px;
+  height: 40px;
+  font-size: 2rem;
+  cursor: pointer;
+}
