@@ -1,8 +1,64 @@
 .garage-wrapper {
+  padding: 10px;
   width: 100%;
 }
 
+.garage__title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .span-title {
+  margin-bottom: 10px;
   font-size: 2rem;
-  color: aliceblue;
+  color: #ffffff;
+}
+
+.input-wrapper {
+  display: flex;
+}
+
+.input-fields {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.input-new-car {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin-right: 10px;
+  width:fit-content;
+  border: 1px solid #9b9b9b;
+  border-radius: 1%;
+}
+
+.change-car {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width:fit-content;
+  border: 1px solid #9b9b9b;
+  border-radius: 1%;
+}
+
+.btn-create {
+  padding: 0 5px;
+}
+
+.btn-update {
+  padding: 0 5px;
+}
+
+.buttons-wrapper {
+  display: flex;
+}
+
+.btn-start,
+.btn-reset,
+.btn-gen-cars {
+  padding: 5px;
+  margin-right: 10px;
 }
