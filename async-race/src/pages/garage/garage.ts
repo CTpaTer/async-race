@@ -12,8 +12,8 @@ export class Garage extends BaseComponent {
     private nameCarInput: HTMLInputElement;
     private inputCarColor: HTMLInputElement;
     private btnCreateCar: HTMLButtonElement;
-    private changeCar: HTMLElement;
-    private spanChangeCar: HTMLElement;
+    private updateCar: HTMLElement;
+    private spanUpdateCar: HTMLElement;
     private buttonsWrapper: HTMLElement;
     private btnStart: HTMLButtonElement;
     private btnReset: HTMLButtonElement;
@@ -57,13 +57,13 @@ export class Garage extends BaseComponent {
 
         this.inputNewCar.appendChild(this.inputWrapper);
 
-        // Change car
+        // Update car
 
-        this.changeCar = createNewElement('div', 'change-car');
-        this.spanChangeCar = createNewElement('span', 'span-title');
-        this.spanChangeCar.innerText = `Change car`;
-        this.changeCar.appendChild(this.spanChangeCar);
-        this.inputFields.appendChild(this.changeCar);
+        this.updateCar = createNewElement('div', 'update-car');
+        this.spanUpdateCar = createNewElement('span', 'span-title');
+        this.spanUpdateCar.innerText = `Update car`;
+        this.updateCar.appendChild(this.spanUpdateCar);
+        this.inputFields.appendChild(this.updateCar);
 
         this.inputWrapper = createNewElement('div', 'input-wrapper');
 
@@ -82,7 +82,7 @@ export class Garage extends BaseComponent {
         this.btnCreateCar.classList.add('btn-update');
         this.inputWrapper.appendChild(this.btnCreateCar);
 
-        this.changeCar.appendChild(this.inputWrapper);
+        this.updateCar.appendChild(this.inputWrapper);
 
         // Block of buttons
 

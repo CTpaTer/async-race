@@ -25,7 +25,8 @@
   margin-bottom: 10px;
 }
 
-.input-new-car {
+.input-new-car,
+.update-car {
   display: flex;
   flex-direction: column;
   padding: 10px;
@@ -35,19 +36,7 @@
   border-radius: 1%;
 }
 
-.change-car {
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  width:fit-content;
-  border: 1px solid #9b9b9b;
-  border-radius: 1%;
-}
-
-.btn-create {
-  padding: 0 5px;
-}
-
+.btn-create,
 .btn-update {
   padding: 0 5px;
 }
