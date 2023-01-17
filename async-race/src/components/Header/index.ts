@@ -1,6 +1,6 @@
 import './header.css';
-import { BaseComponent } from '../base-component';
-import createNewElement from '../createNewElement';
+import { BaseComponent } from '../../utils/base-component';
+import createNewElement from '../../utils/createNewElement';
 
 export class Header extends BaseComponent {
     header: HTMLElement;

@@ -1,6 +1,6 @@
 import './garage.css';
-import { BaseComponent } from '../../components/base-component';
-import createNewElement from '../../components/createNewElement';
+import { BaseComponent } from '../../utils/base-component';
+import createNewElement from '../../utils/createNewElement';
 
 export class Garage extends BaseComponent {
     private garageTitle: HTMLElement;

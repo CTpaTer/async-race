@@ -1,7 +1,7 @@
 import { Header } from '../../components/Header';
 import { Garage } from '../garage/garage';
 import { Winners } from '../winners/winners';
-import createNewElement from '../../components/createNewElement';
+import createNewElement from '../../utils/createNewElement';
 
 export class App {
     private readonly rootElement: HTMLElement;

@@ -1,6 +1,6 @@
 import './winners.css';
-import { BaseComponent } from '../../components/base-component';
-import createNewElement from '../../components/createNewElement';
+import { BaseComponent } from '../../utils/base-component';
+import createNewElement from '../../utils/createNewElement';
 
 export class Winners extends BaseComponent {
     private winnersTitle: HTMLElement;
