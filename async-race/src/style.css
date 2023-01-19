@@ -11,3 +11,8 @@ html {
 .body {
   background-color: #484848;
 }
+
+.btn-pagin-next,
+.btn-pagin-prev {
+  cursor: pointer;
+}

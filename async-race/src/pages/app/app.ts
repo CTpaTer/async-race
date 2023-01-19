@@ -5,6 +5,13 @@ import { Winners } from '../winners/winners';
 import createNewElement from '../../utils/createNewElement';
 import { UiComponent } from '../../utils/ui';
 import { insertAmountCars, generateRandomCars } from '../../components/functions';
+import { SessionStorageUtil } from '../../utils/sessionStorageUtil';
+
+const storage = new SessionStorageUtil();
+const pageNumber = storage.getPageNamber();
+if (!pageNumber) {
+    storage.setPageNamber(1);
+}
 
 export class App {
     private readonly rootElement: HTMLElement;
@@ -57,7 +64,7 @@ export class App {
                 this.ui.createCar(car);
                 insertAmountCars();
                 garageCarWrapper.innerHTML = '';
-                this.ui.createGarageCars();
+                this.ui.createGarageCars(storage.getPageNamber());
             });
         }
 
@@ -71,7 +78,7 @@ export class App {
                 this.ui.deleteCar(Number(id));
                 insertAmountCars();
                 garageCarWrapper.innerHTML = '';
-                this.ui.createGarageCars();
+                this.ui.createGarageCars(storage.getPageNamber());
             }
         });
 
@@ -81,9 +88,45 @@ export class App {
         if (!generateCars) throw new Error();
         generateCars.addEventListener('click', () => {
             generateRandomCars();
-            insertAmountCars();
             garageCarWrapper.innerHTML = '';
-            this.ui.createGarageCars();
+            this.ui.createGarageCars(storage.getPageNamber());
+            insertAmountCars();
         });
+
+        // Next page
+        const getNextPage: HTMLButtonElement | null = document.querySelector('.btn-pagin-next');
+        if (!getNextPage) throw new Error();
+        getNextPage.addEventListener('click', async () => {
+            const cars = await this.ui.getCarsAmount();
+            const currentNumber = storage.getPageNamber();
+            if (currentNumber <= Math.floor(cars / 7)) {
+                garageCarWrapper.innerHTML = '';
+                const newPageNumber = +currentNumber + 1;
+                this.ui.createGarageCars(newPageNumber);
+                storage.setPageNamber(newPageNumber);
+                updatePageNumber();
+            }
+        });
+
+        // Previous page
+        const getPreviousPage: HTMLButtonElement | null = document.querySelector('.btn-pagin-prev');
+        if (!getPreviousPage) throw new Error();
+        getPreviousPage.addEventListener('click', () => {
+            const currentNumber = storage.getPageNamber();
+            if (currentNumber > 1) {
+                garageCarWrapper.innerHTML = '';
+                const newPageNumber = +currentNumber - 1;
+                this.ui.createGarageCars(newPageNumber);
+                storage.setPageNamber(newPageNumber);
+                updatePageNumber();
+            }
+        });
+
+        const updatePageNumber = () => {
+            this.garage.spanPageNumber.innerText = `Page: # ${storage.getPageNamber()}`;
+        };
+
+        this.ui.createGarageCars(storage.getPageNamber());
+        updatePageNumber();
     }
 }

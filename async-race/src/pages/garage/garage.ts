@@ -2,7 +2,6 @@ import './garage.css';
 import { BaseComponent } from '../../utils/base-component';
 import createNewElement from '../../utils/createNewElement';
 import { UiComponent } from '../../utils/ui';
-// import { createCar } from '../../components/createCarView';
 
 export class Garage extends BaseComponent {
     private garageTitle: HTMLElement;
@@ -23,6 +22,7 @@ export class Garage extends BaseComponent {
     private textWrapper: HTMLElement;
     private spanNumberPage: HTMLElement;
     private spanAmountCars: HTMLElement;
+    public spanPageNumber: HTMLElement;
     private garageGars: HTMLElement;
     constructor() {
         super('div', ['garage-wrapper']);
@@ -114,8 +114,10 @@ export class Garage extends BaseComponent {
         this.textWrapper = createNewElement('div', 'text-wrapper');
         this.spanNumberPage = createNewElement('span', 'span-number-page');
         this.spanAmountCars = createNewElement('span', 'span-amount-cars') as HTMLElement;
+        this.spanPageNumber = createNewElement('span', 'span-page-number') as HTMLElement;
         this.textWrapper.appendChild(this.spanNumberPage);
         this.textWrapper.appendChild(this.spanAmountCars);
+        this.textWrapper.appendChild(this.spanPageNumber);
 
         this.container.appendChild(this.textWrapper);
 
@@ -142,8 +144,6 @@ export class Garage extends BaseComponent {
         paginBtns.appendChild(paginNext);
 
         // =========================================
-
-        ui.createGarageCars();
 
         const insertAmountCars = async () => {
             const count = await ui.getCarsAmount();

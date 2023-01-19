@@ -56,9 +56,11 @@
   cursor: pointer;
 }
 
-.span-amount-cars {
+.span-amount-cars,
+.span-page-number {
   color: #ffffff;
   font-size: 3rem;
+  margin-right: 10px;
 }
 
 /* ======================= */
