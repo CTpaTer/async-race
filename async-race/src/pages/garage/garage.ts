@@ -123,6 +123,24 @@ export class Garage extends BaseComponent {
 
         this.container.appendChild(this.garageGars);
 
+        // Pagination buttons
+
+        const paginBtns = document.createElement('div');
+        paginBtns.classList.add('pagin-btns');
+        this.container.appendChild(paginBtns);
+
+        const paginPrev = document.createElement('button');
+        paginPrev.textContent = 'Prev';
+        paginPrev.classList.add('btn-pagin-prev');
+        paginPrev.dataset.select = ``;
+        paginBtns.appendChild(paginPrev);
+
+        const paginNext = document.createElement('button');
+        paginNext.textContent = 'Next';
+        paginNext.classList.add('btn-pagin-next');
+        paginNext.dataset.select = ``;
+        paginBtns.appendChild(paginNext);
+
         // =========================================
 
         ui.createGarageCars();

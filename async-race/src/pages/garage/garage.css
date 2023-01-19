@@ -73,7 +73,7 @@
 
 .car {
   width: 100%;
-  height: 14vh;
+  height: 11vh;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -82,6 +82,7 @@
   justify-content: flex-start;
   width: 100%;
   border-bottom: 4px dashed #fff;
+  margin-bottom: 10px;
 }
 
 .car-name {
@@ -98,13 +99,13 @@
 
 .car-btns button {
   margin-right: 5px;
-  width: 80px;
+  width: 150px;
   height: 25px;
 }
 
 .svg-car {
   position: absolute;
-  bottom: -9%;
+  bottom: -14%;
   left: 20px;
   width: 80px;
   height: 80px;
@@ -112,10 +113,10 @@
 
 .svg-finish {
   position: absolute;
-  bottom: -30%;
+  bottom: 0%;
   right: 120px;
   width: 50px;
-  height: 90px;
+  height: 50px;
 }
 
 .destination-div {
@@ -137,4 +138,10 @@
 .btn-select,
 .btn-remove {
   cursor: pointer;
+}
+
+.pagin-btns button {
+  width: 60px;
+  height: 30px;
+  margin: 10px;
 }
