@@ -11,13 +11,13 @@ export const createTrackView = (obj: ICar) => {
     carWrapper.appendChild(carBtns);
 
     const btnSelect = document.createElement('button');
-    btnSelect.textContent = 'Select car';
+    btnSelect.textContent = 'Select';
     btnSelect.classList.add('btn-select');
     btnSelect.dataset.select = `${obj.id}`;
     carBtns.appendChild(btnSelect);
 
     const btnRemove = document.createElement('button');
-    btnRemove.textContent = 'Remove car';
+    btnRemove.textContent = 'Remove';
     btnRemove.classList.add('btn-remove');
     btnRemove.dataset.remove = `${obj.id}`;
     carBtns.appendChild(btnRemove);

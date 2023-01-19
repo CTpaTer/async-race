@@ -1,11 +1,10 @@
 import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
-
 import { Garage } from '../garage/garage';
 import { Winners } from '../winners/winners';
 import createNewElement from '../../utils/createNewElement';
 import { UiComponent } from '../../utils/ui';
-import { insertAmountCars } from '../../components/functions';
+import { insertAmountCars, generateRandomCars } from '../../components/functions';
 
 export class App {
     private readonly rootElement: HTMLElement;
@@ -62,7 +61,7 @@ export class App {
             });
         }
 
-        // delete car on click 'Remove car'
+        // delete car on click 'Remove'
         document.addEventListener('click', (e) => {
             const target = e.target as HTMLElement;
             const garageCarWrapper = document.querySelector('.garage-cars') as HTMLElement;
@@ -74,6 +73,17 @@ export class App {
                 garageCarWrapper.innerHTML = '';
                 this.ui.createGarageCars();
             }
+        });
+
+        // Generate random cars
+        const generateCars: HTMLButtonElement | null = document.querySelector('.btn-gen-cars');
+        const garageCarWrapper = document.querySelector('.garage-cars') as HTMLElement;
+        if (!generateCars) throw new Error();
+        generateCars.addEventListener('click', () => {
+            generateRandomCars();
+            insertAmountCars();
+            garageCarWrapper.innerHTML = '';
+            this.ui.createGarageCars();
         });
     }
 }
