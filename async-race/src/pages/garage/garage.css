@@ -39,10 +39,13 @@
 .btn-create,
 .btn-update {
   padding: 0 5px;
+  cursor: pointer;
 }
 
-.buttons-wrapper {
+.buttons-wrapper,
+.text-wrapper {
   display: flex;
+  margin-bottom: 10px;
 }
 
 .btn-start,
@@ -50,4 +53,88 @@
 .btn-gen-cars {
   padding: 5px;
   margin-right: 10px;
+  cursor: pointer;
+}
+
+.span-amount-cars {
+  color: #ffffff;
+  font-size: 3rem;
+}
+
+/* ======================= */
+
+.garage-cars {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.car {
+  width: 100%;
+  height: 14vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  border-bottom: 4px dashed #fff;
+}
+
+.car-name {
+  width: 100%;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.car-btns {
+  width:fit-content;
+  display: flex;
+  flex-direction: row;
+}
+
+.car-btns button {
+  margin-right: 5px;
+  width: 80px;
+  height: 25px;
+}
+
+.svg-car {
+  position: absolute;
+  bottom: -9%;
+  left: 20px;
+  width: 80px;
+  height: 80px;
+}
+
+.svg-finish {
+  position: absolute;
+  bottom: -30%;
+  right: 120px;
+  width: 50px;
+  height: 90px;
+}
+
+.destination-div {
+  display: flex;
+  flex-direction: column;
+  font-size: 2rem;
+  color: #ffffff;
+}
+
+.destination-start {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.destination-end {
+  padding: 5px;
+}
+
+.btn-select,
+.btn-remove {
+  cursor: pointer;
 }

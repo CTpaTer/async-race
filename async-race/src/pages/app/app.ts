@@ -2,12 +2,15 @@ import { Header } from '../../components/Header';
 import { Garage } from '../garage/garage';
 import { Winners } from '../winners/winners';
 import createNewElement from '../../utils/createNewElement';
+import { UiComponent } from '../../utils/ui';
+import { insertAmountCars } from '../../components/functions';
 
 export class App {
     private readonly rootElement: HTMLElement;
     private readonly garage: Garage;
     private readonly winners: Winners;
     private readonly header: Header;
+    private readonly ui: UiComponent;
     private readonly main: HTMLElement;
 
     constructor(element: HTMLElement) {
@@ -15,6 +18,7 @@ export class App {
         this.header = new Header();
         this.winners = new Winners();
         this.garage = new Garage();
+        this.ui = new UiComponent();
         this.rootElement.appendChild(this.header.container);
         this.main = createNewElement('main', 'main');
         this.main.appendChild(this.garage.container);
@@ -35,5 +39,36 @@ export class App {
                 this.main.appendChild(this.garage.container);
             });
         }
+
+        const clickAddCar: HTMLButtonElement | null = document.querySelector('.btn-create');
+        if (clickAddCar) {
+            clickAddCar.addEventListener('click', () => {
+                const inputName = document.querySelector('input[type="text"]') as HTMLInputElement;
+                const inputColor = document.querySelector('input[type="color"]') as HTMLInputElement;
+                const garageCarWrapper = document.querySelector('.garage-cars') as HTMLElement;
+                const car = {
+                    name: inputName.value,
+                    color: inputColor.value,
+                };
+                this.ui.createCar(car);
+                insertAmountCars();
+                garageCarWrapper.innerHTML = '';
+                this.ui.createGarageCars();
+            });
+        }
+
+        // delete car on click 'Remove car'
+        document.addEventListener('click', (e) => {
+            const target = e.target as HTMLElement;
+            const garageCarWrapper = document.querySelector('.garage-cars') as HTMLElement;
+            if (target.classList.contains('btn-remove')) {
+                const id = target.dataset.remove;
+
+                this.ui.deleteCar(Number(id));
+                insertAmountCars();
+                garageCarWrapper.innerHTML = '';
+                this.ui.createGarageCars();
+            }
+        });
     }
 }

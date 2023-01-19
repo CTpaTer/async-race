@@ -1,6 +1,8 @@
 import './garage.css';
 import { BaseComponent } from '../../utils/base-component';
 import createNewElement from '../../utils/createNewElement';
+import { UiComponent } from '../../utils/ui';
+// import { createCar } from '../../components/createCarView';
 
 export class Garage extends BaseComponent {
     private garageTitle: HTMLElement;
@@ -18,6 +20,10 @@ export class Garage extends BaseComponent {
     private btnStart: HTMLButtonElement;
     private btnReset: HTMLButtonElement;
     private btnGenCars: HTMLButtonElement;
+    private textWrapper: HTMLElement;
+    private spanNumberPage: HTMLElement;
+    private spanAmountCars: HTMLElement;
+    private garageGars: HTMLElement;
     constructor() {
         super('div', ['garage-wrapper']);
 
@@ -104,5 +110,30 @@ export class Garage extends BaseComponent {
         this.buttonsWrapper.appendChild(this.btnGenCars);
 
         this.container.appendChild(this.buttonsWrapper);
+
+        this.textWrapper = createNewElement('div', 'text-wrapper');
+        this.spanNumberPage = createNewElement('span', 'span-number-page');
+        this.spanAmountCars = createNewElement('span', 'span-amount-cars') as HTMLElement;
+        this.textWrapper.appendChild(this.spanNumberPage);
+        this.textWrapper.appendChild(this.spanAmountCars);
+
+        this.container.appendChild(this.textWrapper);
+
+        this.garageGars = createNewElement('div', 'garage-cars');
+
+        this.container.appendChild(this.garageGars);
+
+        // =========================================
+
+        ui.createGarageCars();
+
+        const insertAmountCars = async () => {
+            const count = await ui.getCarsAmount();
+            this.spanAmountCars.innerText = `Garage: (${count})`;
+        };
+
+        insertAmountCars();
     }
 }
+
+const ui = new UiComponent();
