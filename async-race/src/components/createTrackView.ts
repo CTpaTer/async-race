@@ -1,6 +1,6 @@
 import { ICar } from './interfaces';
 
-export const createCarView = (obj: ICar) => {
+export const createTrackView = (obj: ICar) => {
     const garageCarWrapper = document.querySelector('.garage-cars') as HTMLElement;
     const carWrapper = document.createElement('div');
     carWrapper.classList.add('car');

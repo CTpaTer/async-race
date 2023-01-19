@@ -1,5 +1,5 @@
 import { ICar } from '../components/interfaces';
-import { createCarView } from '../components/createCarView';
+import { createTrackView } from '../components/createTrackView';
 
 export class UiComponent {
     baseLink: string;
@@ -37,7 +37,7 @@ export class UiComponent {
         const response = await fetch(`${this.garage}?_page=${page}&_limit=${limit}`);
         const cars = await response.json();
         cars.forEach((element: ICar) => {
-            createCarView(element);
+            createTrackView(element);
         });
     }
 
