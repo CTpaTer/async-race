@@ -51,6 +51,8 @@ export class App {
             });
         }
 
+        // Add new car
+
         const clickAddCar: HTMLButtonElement | null = document.querySelector('.btn-create');
         if (clickAddCar) {
             clickAddCar.addEventListener('click', () => {
@@ -68,11 +70,47 @@ export class App {
             });
         }
 
+        // Select car on click 'Select'
+        document.addEventListener('click', async (e) => {
+            const target = e.target as HTMLElement;
+            if (target.classList.contains('btn-select')) {
+                const name = document.querySelector('.update-car-name') as HTMLInputElement;
+                const color = document.querySelector('.update-car-color') as HTMLInputElement;
+                const button = document.querySelector('.btn-update') as HTMLButtonElement;
+                const id = target.dataset.select;
+                const car = await this.ui.getCar(Number(id));
+                name.value = car.name;
+                color.value = car.color;
+                button.dataset.update = car.id;
+            }
+        });
+
+        // Update car
+
+        const clickUpdCar: HTMLButtonElement | null = document.querySelector('.btn-update');
+        if (clickUpdCar) {
+            clickUpdCar.addEventListener('click', () => {
+                const inputName = document.querySelector('input[class="update-car-name"]') as HTMLInputElement;
+                const inputColor = document.querySelector('input[class="update-car-color"]') as HTMLInputElement;
+                const button = document.querySelector('.btn-update') as HTMLButtonElement;
+                const id = Number(button.dataset.update);
+                const garageCarWrapper = document.querySelector('.garage-cars') as HTMLElement;
+                const car = {
+                    name: inputName.value,
+                    color: inputColor.value,
+                };
+                this.ui.updateCar(id, car);
+                insertAmountCars();
+                garageCarWrapper.innerHTML = '';
+                this.ui.createGarageCars(storage.getPageNamber());
+            });
+        }
+
         // delete car on click 'Remove'
         document.addEventListener('click', (e) => {
             const target = e.target as HTMLElement;
-            const garageCarWrapper = document.querySelector('.garage-cars') as HTMLElement;
             if (target.classList.contains('btn-remove')) {
+                const garageCarWrapper = document.querySelector('.garage-cars') as HTMLElement;
                 const id = target.dataset.remove;
 
                 this.ui.deleteCar(Number(id));
@@ -86,11 +124,11 @@ export class App {
         const generateCars: HTMLButtonElement | null = document.querySelector('.btn-gen-cars');
         const garageCarWrapper = document.querySelector('.garage-cars') as HTMLElement;
         if (!generateCars) throw new Error();
-        generateCars.addEventListener('click', () => {
-            generateRandomCars();
+        generateCars.addEventListener('click', async () => {
+            await generateRandomCars();
             garageCarWrapper.innerHTML = '';
             this.ui.createGarageCars(storage.getPageNamber());
-            insertAmountCars();
+            await insertAmountCars();
         });
 
         // Next page
@@ -128,5 +166,19 @@ export class App {
 
         this.ui.createGarageCars(storage.getPageNamber());
         updatePageNumber();
+
+        // ================= Constructor end ========================
+    }
+
+    disableStartButton(node: HTMLElement) {
+        const startButton = node.querySelector('.destination-start') as HTMLButtonElement;
+        startButton.disabled = true;
+        // startButton.classList.remove('active');
+    }
+
+    disableStopButton(node: HTMLElement) {
+        const stopButton = node.querySelector('.destination-end') as HTMLButtonElement;
+        stopButton.disabled = true;
+        // stopButton.classList.remove('active');
     }
 }

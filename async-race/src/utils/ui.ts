@@ -41,6 +41,24 @@ export class UiComponent {
         });
     }
 
+    async getCar(id: number) {
+        const response = await fetch(`${this.garage}/${id}`);
+        const car = await response.json();
+        return car;
+    }
+
+    async updateCar(id: number, body: ICar) {
+        const response = await fetch(`${this.garage}/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        const cars = response.json();
+        return cars;
+    }
+
     async deleteCar(id: number) {
         await fetch(`${this.garage}/${id}`, {
             method: 'DELETE',

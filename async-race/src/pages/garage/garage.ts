@@ -75,17 +75,20 @@ export class Garage extends BaseComponent {
 
         this.nameCarInput = document.createElement('input');
         this.nameCarInput.type = 'text';
+        this.nameCarInput.classList.add('update-car-name');
         this.nameCarInput.placeholder = 'Name car';
         this.inputWrapper.appendChild(this.nameCarInput);
 
         this.inputCarColor = document.createElement('input');
         this.inputCarColor.type = 'color';
+        this.inputCarColor.classList.add('update-car-color');
         this.inputCarColor.value = '#e66465';
         this.inputWrapper.appendChild(this.inputCarColor);
 
         this.btnCreateCar = document.createElement('button');
         this.btnCreateCar.textContent = 'UPDATE';
         this.btnCreateCar.classList.add('btn-update');
+        this.btnCreateCar.dataset.update = '0';
         this.inputWrapper.appendChild(this.btnCreateCar);
 
         this.updateCar.appendChild(this.inputWrapper);

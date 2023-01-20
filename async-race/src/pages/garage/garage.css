@@ -75,7 +75,7 @@
 
 .car {
   width: 100%;
-  height: 11vh;
+  height: 8vh;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -108,9 +108,9 @@
 .svg-car {
   position: absolute;
   bottom: -14%;
-  left: 20px;
+  left: 30px;
   width: 80px;
-  height: 80px;
+  height: 65px;
 }
 
 .svg-finish {
@@ -123,9 +123,13 @@
 
 .destination-div {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   font-size: 2rem;
   color: #ffffff;
+}
+
+.destination-div button {
+  margin-right: 5px;
 }
 
 .destination-start {
