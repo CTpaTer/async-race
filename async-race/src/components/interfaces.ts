@@ -8,3 +8,7 @@ export interface engineData {
     distance: number;
     velocity: number;
 }
+
+export interface IAnimationData {
+    [key: string]: number;
+}

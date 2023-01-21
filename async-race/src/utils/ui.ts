@@ -1,5 +1,6 @@
 import { ICar } from '../components/interfaces';
 import { createTrackView } from '../components/createTrackView';
+import { engineData } from '../components/interfaces';
 
 export class UiComponent {
     baseLink: string;
@@ -63,5 +64,13 @@ export class UiComponent {
         await fetch(`${this.garage}/${id}`, {
             method: 'DELETE',
         });
+    }
+
+    async startEngine(id: number): Promise<engineData> {
+        const response = await fetch(`${this.engine}?id=${id}&status=started`, {
+            method: 'PATCH',
+        });
+        const body = await response.json();
+        return body;
     }
 }

@@ -108,7 +108,7 @@
 .svg-car {
   position: absolute;
   bottom: -14%;
-  left: 30px;
+  left: 50px;
   width: 80px;
   height: 65px;
 }
@@ -116,7 +116,7 @@
 .svg-finish {
   position: absolute;
   bottom: 0%;
-  right: 120px;
+  right: 50px;
   width: 50px;
   height: 50px;
 }
@@ -137,7 +137,7 @@
   cursor: pointer;
 }
 
-.destination-end {
+.destination-stop {
   padding: 5px;
 }
 

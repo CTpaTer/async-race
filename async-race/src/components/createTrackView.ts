@@ -40,7 +40,7 @@ export const createTrackView = (obj: ICar) => {
 
     const destinationEnd = document.createElement('button');
     destinationEnd.textContent = 'B';
-    destinationEnd.classList.add('destination-end');
+    destinationEnd.classList.add('destination-stop');
     destinationEnd.dataset.stop = `${obj.id}`;
     destinationEnd.disabled = true;
     destinationDiv.appendChild(destinationEnd);

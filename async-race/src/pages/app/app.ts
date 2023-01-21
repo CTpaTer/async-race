@@ -4,7 +4,7 @@ import { Garage } from '../garage/garage';
 import { Winners } from '../winners/winners';
 import createNewElement from '../../utils/createNewElement';
 import { UiComponent } from '../../utils/ui';
-import { insertAmountCars, generateRandomCars } from '../../components/functions';
+import { insertAmountCars, generateRandomCars, animationCar, stopAnimation } from '../../components/functions';
 import { SessionStorageUtil } from '../../utils/sessionStorageUtil';
 
 const storage = new SessionStorageUtil();
@@ -86,7 +86,6 @@ export class App {
         });
 
         // Update car
-
         const clickUpdCar: HTMLButtonElement | null = document.querySelector('.btn-update');
         if (clickUpdCar) {
             clickUpdCar.addEventListener('click', () => {
@@ -160,6 +159,26 @@ export class App {
             }
         });
 
+        // получение скорости нажатием на кнопку A
+        document.addEventListener('click', (e) => {
+            const target = e.target as HTMLElement;
+            if (target.classList.contains('destination-start')) {
+                const id = target.dataset.start;
+                if (!id) throw new Error();
+                this.handleStartButtonClick(id);
+            }
+        });
+
+        // остановка машины на кнопку B
+        document.addEventListener('click', (e) => {
+            const target = e.target as HTMLElement;
+            if (target.classList.contains('destination-stop')) {
+                const id = target.dataset.stop;
+                if (!id) throw new Error();
+                this.handleStopButtonClick(id);
+            }
+        });
+
         const updatePageNumber = () => {
             this.garage.spanPageNumber.innerText = `Page: # ${storage.getPageNamber()}`;
         };
@@ -170,15 +189,59 @@ export class App {
         // ================= Constructor end ========================
     }
 
-    disableStartButton(node: HTMLElement) {
-        const startButton = node.querySelector('.destination-start') as HTMLButtonElement;
+    disableStartButton(id: string) {
+        const button = `[data-start="${id}"]`;
+        const startButton = document.querySelector(`${button}`) as HTMLButtonElement;
         startButton.disabled = true;
-        // startButton.classList.remove('active');
     }
 
-    disableStopButton(node: HTMLElement) {
-        const stopButton = node.querySelector('.destination-end') as HTMLButtonElement;
+    undisableStartButton(id: string) {
+        const button = `[data-start="${id}"]`;
+        const startButton = document.querySelector(`${button}`) as HTMLButtonElement;
+        startButton.disabled = false;
+    }
+
+    disableStopButton(id: string) {
+        const button = `[data-stop="${id}"]`;
+        const stopButton = document.querySelector(`${button}`) as HTMLButtonElement;
         stopButton.disabled = true;
-        // stopButton.classList.remove('active');
+    }
+
+    undisableStopButton(id: string) {
+        const button = `[data-stop="${id}"]`;
+        const stopButton = document.querySelector(`${button}`) as HTMLButtonElement;
+        stopButton.disabled = false;
+    }
+
+    async handleStartButtonClick(idA: string) {
+        const id = Number(idA);
+        this.disableStartButton(idA);
+        this.undisableStopButton(idA);
+        const velocityInfo = await this.getCarVelocity(id);
+        const velocity = velocityInfo.velocity;
+        const widthLine = document.querySelector('.car') as HTMLElement;
+        const distance = widthLine.offsetWidth - 200;
+
+        const carSvg = `[data-carsvg="${id}"]`;
+        const car = document.querySelector(`${carSvg}`) as HTMLButtonElement;
+
+        const animationTame = (distance / velocity) * 1000;
+        animationCar(car, distance, animationTame);
+    }
+
+    handleStopButtonClick(idA: string) {
+        const id = Number(idA);
+        this.undisableStartButton(idA);
+        this.disableStopButton(idA);
+
+        const carSvg = `[data-carsvg="${id}"]`;
+        const car = document.querySelector(`${carSvg}`) as HTMLElement;
+        stopAnimation();
+        car.style.transform = `translateX(0px)`;
+    }
+
+    async getCarVelocity(id: number) {
+        const velocity = await this.ui.startEngine(id);
+        return velocity;
     }
 }
