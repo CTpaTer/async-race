@@ -179,6 +179,16 @@ export class App {
             }
         });
 
+        // START / STOP RACE BUTTONS LISTENERS
+        const startRaceButton: HTMLButtonElement | null = document.querySelector('.btn-start');
+        if (startRaceButton) {
+            startRaceButton.addEventListener('click', this.handleStartRaceButtonClick.bind(this));
+        }
+        const resetRaceButton: HTMLButtonElement | null = document.querySelector('.btn-reset');
+        if (resetRaceButton) {
+            resetRaceButton.addEventListener('click', this.handleStopRaceButtonClick.bind(this));
+        }
+
         const updatePageNumber = () => {
             this.garage.spanPageNumber.innerText = `Page: # ${storage.getPageNamber()}`;
         };
@@ -223,25 +233,46 @@ export class App {
         const distance = widthLine.offsetWidth - 200;
 
         const carSvg = `[data-carsvg="${id}"]`;
-        const car = document.querySelector(`${carSvg}`) as HTMLButtonElement;
+        const car = document.querySelector(`${carSvg}`) as HTMLElement;
 
         const animationTame = (distance / velocity) * 1000;
         animationCar(car, distance, animationTame);
     }
 
-    handleStopButtonClick(idA: string) {
+    async handleStopButtonClick(idA: string) {
         const id = Number(idA);
         this.undisableStartButton(idA);
         this.disableStopButton(idA);
 
         const carSvg = `[data-carsvg="${id}"]`;
         const car = document.querySelector(`${carSvg}`) as HTMLElement;
-        stopAnimation();
+        await stopAnimation(id);
         car.style.transform = `translateX(0px)`;
     }
 
     async getCarVelocity(id: number) {
         const velocity = await this.ui.startEngine(id);
         return velocity;
+    }
+
+    async handleStartRaceButtonClick() {
+        const linesArray = document.querySelectorAll('[data-start]');
+        linesArray.forEach((element) => {
+            const el = element as HTMLElement;
+            const id = el.dataset.start;
+            if (!id) throw new Error();
+            this.handleStartButtonClick(id);
+            this.disableStopButton(`${id}`);
+        });
+    }
+
+    async handleStopRaceButtonClick() {
+        const linesArray = document.querySelectorAll('[data-stop]');
+        linesArray.forEach((element) => {
+            const el = element as HTMLElement;
+            const id = el.dataset.stop;
+            if (!id) throw new Error();
+            this.handleStopButtonClick(id);
+        });
     }
 }

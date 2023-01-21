@@ -73,4 +73,12 @@ export class UiComponent {
         const body = await response.json();
         return body;
     }
+
+    async stopEngine(id: number): Promise<engineData> {
+        const response = await fetch(`${this.engine}?id=${id}&status=stopped`, {
+            method: 'PATCH',
+        });
+        const body = await response.json();
+        return body;
+    }
 }

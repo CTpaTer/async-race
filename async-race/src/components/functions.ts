@@ -48,6 +48,9 @@ export function animationCar(car: HTMLElement, distance: number, animationTame: 
     return state;
 }
 
-export function stopAnimation() {
-    cancelAnimationFrame(animationVar.id);
+export async function stopAnimation(id: number) {
+    const response = await ui.stopEngine(id);
+    if (response.velocity === 0) {
+        cancelAnimationFrame(animationVar.id);
+    }
 }
