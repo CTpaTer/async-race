@@ -25,6 +25,7 @@ export const createTrackView = (obj: ICar) => {
     const carName = document.createElement('div');
     carName.classList.add('car-name');
     carName.textContent = obj.name;
+    carName.dataset.name = `${obj.id}`;
     carName.style.color = '#FFFFFF';
     carBtns.appendChild(carName);
 

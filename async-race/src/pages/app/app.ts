@@ -223,6 +223,16 @@ export class App {
         stopButton.disabled = false;
     }
 
+    disableRaceButton() {
+        const raceButton = document.querySelector(`.btn-start`) as HTMLButtonElement;
+        raceButton.disabled = true;
+    }
+
+    undisableRaceButton() {
+        const raceButton = document.querySelector(`.btn-start`) as HTMLButtonElement;
+        raceButton.disabled = false;
+    }
+
     async handleStartButtonClick(idA: string) {
         const id = Number(idA);
         this.disableStartButton(idA);
@@ -264,15 +274,21 @@ export class App {
             this.handleStartButtonClick(id);
             this.disableStopButton(`${id}`);
         });
+        this.disableRaceButton();
     }
 
     async handleStopRaceButtonClick() {
         const linesArray = document.querySelectorAll('[data-stop]');
+        const message: HTMLElement | null = document.querySelector('.span-winner-message');
+        if (message) {
+            message.innerHTML = '';
+        }
         linesArray.forEach((element) => {
             const el = element as HTMLElement;
             const id = el.dataset.stop;
             if (!id) throw new Error();
             this.handleStopButtonClick(id);
         });
+        this.undisableRaceButton();
     }
 }

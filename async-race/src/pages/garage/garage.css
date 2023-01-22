@@ -63,6 +63,12 @@
   margin-right: 10px;
 }
 
+.span-winner-message {
+  color: #ffffff;
+  font-size: 3rem;
+  margin-left: 50px;
+}
+
 /* ======================= */
 
 .garage-cars {

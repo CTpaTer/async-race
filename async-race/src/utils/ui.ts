@@ -1,6 +1,6 @@
 import { ICar } from '../components/interfaces';
 import { createTrackView } from '../components/createTrackView';
-import { engineData } from '../components/interfaces';
+import { engineData, IWinner } from '../components/interfaces';
 
 export class UiComponent {
     baseLink: string;
@@ -80,5 +80,41 @@ export class UiComponent {
         });
         const body = await response.json();
         return body;
+    }
+
+    async getAllWinners() {
+        const response = await fetch(`${this.winners}`);
+        const winners = await response.json();
+        return winners;
+    }
+
+    async createWinner(body: IWinner) {
+        const response = await fetch(`${this.winners}`, {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        const winners = await response.json();
+        return winners;
+    }
+
+    async getWinner(id: number) {
+        const response = await fetch(`${this.winners}/${id}`);
+        const winner = await response.json();
+        return winner;
+    }
+
+    async updateWinner(id: number, body: IWinner) {
+        const response = await fetch(`${this.winners}/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        const winners = response.json();
+        return winners;
     }
 }

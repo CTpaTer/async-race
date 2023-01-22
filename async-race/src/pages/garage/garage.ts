@@ -23,6 +23,7 @@ export class Garage extends BaseComponent {
     private spanNumberPage: HTMLElement;
     private spanAmountCars: HTMLElement;
     public spanPageNumber: HTMLElement;
+    public spanWinnerMessage: HTMLElement;
     private garageGars: HTMLElement;
     constructor() {
         super('div', ['garage-wrapper']);
@@ -118,9 +119,11 @@ export class Garage extends BaseComponent {
         this.spanNumberPage = createNewElement('span', 'span-number-page');
         this.spanAmountCars = createNewElement('span', 'span-amount-cars') as HTMLElement;
         this.spanPageNumber = createNewElement('span', 'span-page-number') as HTMLElement;
+        this.spanWinnerMessage = createNewElement('span', 'span-winner-message') as HTMLElement;
         this.textWrapper.appendChild(this.spanNumberPage);
         this.textWrapper.appendChild(this.spanAmountCars);
         this.textWrapper.appendChild(this.spanPageNumber);
+        this.textWrapper.appendChild(this.spanWinnerMessage);
 
         this.container.appendChild(this.textWrapper);
 
