@@ -99,6 +99,12 @@
   text-align: center;
 }
 
+.car-engine {
+  font-size: 1.6rem;
+  text-align: center;
+  width: 400px;
+}
+
 .car-btns {
   width:fit-content;
   display: flex;

@@ -246,7 +246,23 @@ export class App {
         const car = document.querySelector(`${carSvg}`) as HTMLElement;
 
         const animationTame = (distance / velocity) * 1000;
-        animationCar(car, distance, animationTame);
+
+        try {
+            animationCar(car, distance, animationTame);
+            const response = await this.ui.switchEngineToDriveMode(id);
+            if (response === 500) {
+                throw new Error();
+            }
+        } catch (e) {
+            console.log('!!! OOPS engine broke down');
+            await stopAnimation(id);
+            this.messageBrokenEngine(id, car);
+            // const carEngine = `[data-engine="${id}"]`;
+            // const brokMessage = document.querySelector(`${carEngine}`) as HTMLElement;
+            // if (car.style.transform !== `translateX(0px)`) {
+            //     brokMessage.innerText = '!!! OOPS engine broke down';
+            // }
+        }
     }
 
     async handleStopButtonClick(idA: string) {
@@ -288,7 +304,22 @@ export class App {
             const id = el.dataset.stop;
             if (!id) throw new Error();
             this.handleStopButtonClick(id);
+            this.clearMessageBrokenEngine(id);
         });
         this.undisableRaceButton();
+    }
+
+    messageBrokenEngine(id: number, car: HTMLElement) {
+        const carEngine = `[data-engine="${id}"]`;
+        const brokMessage = document.querySelector(`${carEngine}`) as HTMLElement;
+        if (car.style.transform !== `translateX(0px)`) {
+            brokMessage.innerText = '!!! OOPS engine broke down';
+        }
+    }
+
+    clearMessageBrokenEngine(id: string) {
+        const carEngine = `[data-engine="${id}"]`;
+        const brokMessage = document.querySelector(`${carEngine}`) as HTMLElement;
+        brokMessage.innerHTML = '';
     }
 }

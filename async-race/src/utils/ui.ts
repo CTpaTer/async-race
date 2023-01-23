@@ -82,6 +82,13 @@ export class UiComponent {
         return body;
     }
 
+    async switchEngineToDriveMode(id: number) {
+        const responce = await fetch(`${this.engine}?id=${id}&status=drive`, {
+            method: 'PATCH',
+        });
+        return responce.status;
+    }
+
     async getAllWinners() {
         const response = await fetch(`${this.winners}`);
         const winners = await response.json();

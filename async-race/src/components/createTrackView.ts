@@ -29,6 +29,12 @@ export const createTrackView = (obj: ICar) => {
     carName.style.color = '#FFFFFF';
     carBtns.appendChild(carName);
 
+    const carEngine = document.createElement('span');
+    carEngine.classList.add('car-engine');
+    carEngine.dataset.engine = `${obj.id}`;
+    carEngine.style.color = '#FFFFFF';
+    carBtns.appendChild(carEngine);
+
     const destinationDiv = document.createElement('div');
     destinationDiv.classList.add('destination-div');
     carWrapper.appendChild(destinationDiv);
