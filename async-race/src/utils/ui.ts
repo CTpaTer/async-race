@@ -124,4 +124,10 @@ export class UiComponent {
         const winners = response.json();
         return winners;
     }
+
+    async deleteWinner(id: number) {
+        await fetch(`${this.winners}/${id}`, {
+            method: 'DELETE',
+        });
+    }
 }

@@ -80,6 +80,13 @@ async function getWinnersList() {
     return array;
 }
 
+export async function getAllWinners() {
+    const winners = await ui.getAllWinners();
+    const array: number[] = [];
+    console.log(array);
+    return winners;
+}
+
 async function createWinner(id: number, time: number) {
     await ui.createWinner({
         id: id,

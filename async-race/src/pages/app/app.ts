@@ -106,7 +106,7 @@ export class App {
         }
 
         // delete car on click 'Remove'
-        document.addEventListener('click', (e) => {
+        document.addEventListener('click', async (e) => {
             const target = e.target as HTMLElement;
             if (target.classList.contains('btn-remove')) {
                 const garageCarWrapper = document.querySelector('.garage-cars') as HTMLElement;
@@ -257,11 +257,6 @@ export class App {
             console.log('!!! OOPS engine broke down');
             await stopAnimation(id);
             this.messageBrokenEngine(id, car);
-            // const carEngine = `[data-engine="${id}"]`;
-            // const brokMessage = document.querySelector(`${carEngine}`) as HTMLElement;
-            // if (car.style.transform !== `translateX(0px)`) {
-            //     brokMessage.innerText = '!!! OOPS engine broke down';
-            // }
         }
     }
 
