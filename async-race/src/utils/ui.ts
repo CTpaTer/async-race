@@ -89,8 +89,8 @@ export class UiComponent {
         return responce.status;
     }
 
-    async getAllWinners() {
-        const response = await fetch(`${this.winners}`);
+    async getAllWinners(sort = 'wins', order = 'DESC', page = 1, limit = 10) {
+        const response = await fetch(`${this.winners}?_page=${page}&_limit=${limit}&_sort=${sort}&_order=${order}`);
         const winners = await response.json();
         return winners;
     }

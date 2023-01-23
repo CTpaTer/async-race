@@ -32,7 +32,7 @@ export function animationCar(car: HTMLElement, distance: number, animationTame: 
     const raceButton = document.querySelector(`.btn-start`) as HTMLButtonElement;
     const startTime = Date.now();
     let start: number | null = null;
-    const carID = car.dataset.carsvg;
+    const carID = car.dataset.carsvg as string;
     async function step(timestamp: number) {
         if (!start) start = timestamp;
         const time = timestamp - start;
@@ -48,6 +48,7 @@ export function animationCar(car: HTMLElement, distance: number, animationTame: 
             deltaTime = Number(deltaTime.toFixed(2));
             if (winnerPerRace === 0) {
                 winnerPerRace = Number(carID);
+                console.log(winnerPerRace);
                 showWinnerMessage(winnerPerRace, deltaTime);
                 const id = winnerPerRace;
                 const winnerList = await getWinnersList();
@@ -65,7 +66,6 @@ export function animationCar(car: HTMLElement, distance: number, animationTame: 
 }
 
 export async function stopAnimation(id: number) {
-    winnerPerRace = 0;
     const carID = 'id' + id;
     const response = await ui.stopEngine(id);
     if (response.velocity === 0) {
@@ -80,10 +80,10 @@ async function getWinnersList() {
     return array;
 }
 
-export async function getAllWinners() {
-    const winners = await ui.getAllWinners();
+export async function getAllWinners(sort: string, order: string) {
+    const winners = await ui.getAllWinners(sort, order);
     const array: number[] = [];
-    console.log(array);
+    winners.forEach((winner: IWinnerWithID) => array.push(winner.id));
     return winners;
 }
 
@@ -111,4 +111,8 @@ async function showWinnerMessage(id: number, deltaTime: number) {
     if (message) {
         message.textContent = `WINNER ${name}! time: ${deltaTime}s.`;
     }
+}
+
+export function resetWinnerPerRace() {
+    winnerPerRace = 0;
 }

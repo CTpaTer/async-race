@@ -4,7 +4,13 @@ import { Garage } from '../garage/garage';
 import { Winners } from '../winners/winners';
 import createNewElement from '../../utils/createNewElement';
 import { UiComponent } from '../../utils/ui';
-import { insertAmountCars, generateRandomCars, animationCar, stopAnimation } from '../../components/functions';
+import {
+    insertAmountCars,
+    generateRandomCars,
+    animationCar,
+    stopAnimation,
+    resetWinnerPerRace,
+} from '../../components/functions';
 import { SessionStorageUtil } from '../../utils/sessionStorageUtil';
 
 const storage = new SessionStorageUtil();
@@ -289,6 +295,7 @@ export class App {
     }
 
     async handleStopRaceButtonClick() {
+        resetWinnerPerRace();
         const linesArray = document.querySelectorAll('[data-stop]');
         const message: HTMLElement | null = document.querySelector('.span-winner-message');
         if (message) {
