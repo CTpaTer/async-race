@@ -38,6 +38,7 @@ export class App {
         const clickBattonWinners: HTMLButtonElement | null = document.querySelector('.btn-winners');
         if (clickBattonWinners) {
             clickBattonWinners.addEventListener('click', () => {
+                this.winners.allWin();
                 this.main.innerHTML = '';
                 this.main.appendChild(this.winners.container);
             });
@@ -254,7 +255,6 @@ export class App {
                 throw new Error();
             }
         } catch (e) {
-            console.log('!!! OOPS engine broke down');
             await stopAnimation(id);
             this.messageBrokenEngine(id, car);
         }

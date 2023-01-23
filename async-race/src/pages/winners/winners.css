@@ -39,6 +39,7 @@
 }
 .column_2 {
   width: 100px;
+	position: relative;
 }
 .column_3 {
   width: 175px;
@@ -70,4 +71,11 @@
 
 .wrapper_table {
 	margin-top: 50px;
+}
+
+.winners__svg-car {
+	position: absolute;
+	top: -10px;
+  left: 10px;
+	height: 40px;
 }
