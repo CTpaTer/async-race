@@ -29,6 +29,7 @@ export const generateRandomCars = async () => {
 // Animation
 const state: IAnimationData = {};
 export function animationCar(car: HTMLElement, distance: number, animationTame: number) {
+    const raceButton = document.querySelector(`.btn-start`) as HTMLButtonElement;
     const startTime = Date.now();
     let start: number | null = null;
     const carID = car.dataset.carsvg;
@@ -41,7 +42,7 @@ export function animationCar(car: HTMLElement, distance: number, animationTame: 
 
         if (passed < distance) {
             state['id' + carID] = window.requestAnimationFrame(step);
-        } else {
+        } else if (raceButton.disabled === true) {
             const endTime = Date.now();
             let deltaTime = (endTime - startTime) / 1000;
             deltaTime = Number(deltaTime.toFixed(2));
