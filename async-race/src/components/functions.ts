@@ -48,7 +48,6 @@ export function animationCar(car: HTMLElement, distance: number, animationTame: 
             deltaTime = Number(deltaTime.toFixed(2));
             if (winnerPerRace === 0) {
                 winnerPerRace = Number(carID);
-                console.log(winnerPerRace);
                 showWinnerMessage(winnerPerRace, deltaTime);
                 const id = winnerPerRace;
                 const winnerList = await getWinnersList();
