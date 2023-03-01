@@ -73,6 +73,7 @@ export class Winners extends BaseComponent {
     async allWin() {
         this.clearTable();
         const allWinners = await getAllWinners('wins', 'DESC');
+        console.log(allWinners);
         allWinners.forEach(async (winner: IWinnerWithID, index: number) => {
             const carId = winner.id;
             const car = await ui.getCar(carId);
